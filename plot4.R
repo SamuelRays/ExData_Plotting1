@@ -24,12 +24,19 @@ data$General_Date <- strptime(paste(as.character(data$Date),
 ## Opening png graphics device and creating new file if doesn't exist.
 ## Size 480 x 480 by default. Plotting in png file and closing device.
 
-png("plot3.png")
-
+png("plot4.png")
+par(mfrow = c(2, 2))
+with(data, plot(General_Date, Global_active_power, type = "l",
+                ylab = "Global Active Power", xlab = ""))
+with(data, plot(General_Date, Voltage, type = "l",
+                ylab = "Voltage", xlab = "datetime"))
 with(data, plot(General_Date, Sub_metering_1, type = "l",
                 ylab = "Energy sub metering", xlab = "", col = "black"))
 with(data, lines(General_Date, Sub_metering_2, col = "red"))
 with(data, lines(General_Date, Sub_metering_3, col = "blue"))
 legend("topright", lty = "solid", col = c("black", "red", "blue"),
-       legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
+       legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"),
+       bty = "n")
+with(data, plot(General_Date, Global_reactive_power, type = "l",
+                ylab = "Global_reactive_power", xlab = "datetime"))
 dev.off()
